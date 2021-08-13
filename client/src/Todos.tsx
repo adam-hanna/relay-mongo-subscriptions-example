@@ -92,6 +92,7 @@ export const Todos = (_props: Props) => {
               newLinkedRecord = store.create(_id, "Todo")
               newLinkedRecord.setValue(completed, "completed")
               newLinkedRecord.setValue(description, "description")
+              newLinkedRecord.setValue(_id, "id")
             }
 
             let linkedRecords = store
