@@ -1,0 +1,95 @@
+version: "3.7"
+
+services:
+  server:
+    build: ./server
+    ports:
+      - "8080:8080"
+      - "5000:5000"
+    depends_on:
+      - mongo-setup
+    links:
+      - mongo1
+    volumes:
+      - ./server:/app
+      - /app/vendor/
+    environment:
+      - WS_PORT=5000
+      - WS_HOST=0.0.0.0
+      - HTTP_PORT=8080
+      - HTTP_HOST=0.0.0.0
+      - MONGO_URL=mongodb://mongo1:27017
+      - MONGO_DB_NAME=todos
+
+  client:
+    build: ./client
+    depends_on:
+      - server
+    links:
+      - server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/home/node/app
+      - /home/node/app/node_modules/
+    environment:
+      - REACT_APP_WS_URL=ws://localhost:5000
+      - REACT_APP_API_URL=http://localhost:8080
+
+  # THANKS!
+  # https://gist.github.com/harveyconnor/518e088bad23a273cae6ba7fc4643549
+  mongo-setup:
+    container_name: mongo-setup
+    image: mongo
+    restart: on-failure
+    links:
+      - mongo1
+      - mongo2
+      - mongo3
+    volumes:
+      - ./docker/scripts/mongodb:/scripts/mongodb
+    entrypoint: [ "sh", "/scripts/mongodb/setup.sh" ] # Make sure this file exists (see below for the setup.sh)
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+
+  mongo1:
+    hostname: mongo1
+    container_name: localmongo1
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--journal", "--dbpath", "/data/db" ]
+    volumes:
+      - ./docker/volumes/mongodb/data1/db:/data/db # This is where your volume will persist. e.g. VOLUME-DIR = ./volumes/mongodb
+      - ./docker/volumes/mongodb/data1/configdb:/data/configdb
+  mongo2:
+    hostname: mongo2
+    container_name: localmongo2
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - 27018:27017
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--journal", "--dbpath", "/data/db" ]
+    volumes:
+      - ./docker/volumes/mongodb/data2/db:/data/db # Note the data2, it must be different to the original set.
+      - ./docker/volumes/mongodb/data2/configdb:/data/configdb
+  mongo3:
+    hostname: mongo3
+    container_name: localmongo3
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - 27019:27017
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--journal", "--dbpath", "/data/db" ]
+    volumes:
+      - ./docker/volumes/mongodb/data3/db:/data/db
+      - ./docker/volumes/mongodb/data3/configdb:/data/configdb

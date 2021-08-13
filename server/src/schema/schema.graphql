@@ -1,7 +1,13 @@
 scalar Object
 
-type Todo {
+type TodoForSubscription {
   _id: ID!
+  description: String!
+  completed: Boolean!
+}
+
+type Todo {
+  id: ID!
   description: String!
   completed: Boolean!
 }
@@ -18,9 +24,9 @@ type UpdateDescription {
 }
 
 type TodoSubscription {
-  doc: Todo!
+  doc: TodoForSubscription!
   operationType: String!
-  updateDescription: UpdateDescription!
+  updateDescription: UpdateDescription
 }
 
 type Query {
@@ -33,5 +39,5 @@ type Subscription {
 
 type Mutation {
   newTodo(description: String!): Todo!
-  toggleTodo(_id: String!): Todo!
+  toggleTodo(id: String!): Todo!
 }

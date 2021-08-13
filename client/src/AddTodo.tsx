@@ -8,7 +8,7 @@ const AddTodoMutation = graphql`
     $description: String!
   ) {
     newTodo(description: $description) {
-      _id
+      id
       description
       completed
     }
@@ -19,16 +19,16 @@ export type Props = {
 
 }
 
-export const AddTodo = ({
-
-}: Props) => {
+export const AddTodo = (_props: Props) => {
   const environment = useRelayEnvironment()
   const [description, setDescription] = useState('')
 
   return (
     <div className="addTodoWrapper">
       <form
-        onSubmit={() => {
+        onSubmit={(e) => {
+          e.preventDefault()
+
           commitMutation(environment, {
             mutation: AddTodoMutation,
             variables: {

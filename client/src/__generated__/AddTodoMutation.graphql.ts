@@ -9,7 +9,7 @@ export type AddTodoMutationVariables = {
 };
 export type AddTodoMutationResponse = {
     readonly newTodo: {
-        readonly _id: string;
+        readonly id: string;
         readonly description: string;
         readonly completed: boolean;
     };
@@ -26,7 +26,7 @@ mutation AddTodoMutation(
   $description: String!
 ) {
   newTodo(description: $description) {
-    _id
+    id
     description
     completed
   }
@@ -60,7 +60,7 @@ v1 = [
         "alias": null,
         "args": null,
         "kind": "ScalarField",
-        "name": "_id",
+        "name": "id",
         "storageKey": null
       },
       {
@@ -99,14 +99,14 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "d9f30f0aaff8cbc314b49bad2ecd596d",
+    "cacheID": "ba7ef0df523c79fbdaa6a73916843b63",
     "id": null,
     "metadata": {},
     "name": "AddTodoMutation",
     "operationKind": "mutation",
-    "text": "mutation AddTodoMutation(\n  $description: String!\n) {\n  newTodo(description: $description) {\n    _id\n    description\n    completed\n  }\n}\n"
+    "text": "mutation AddTodoMutation(\n  $description: String!\n) {\n  newTodo(description: $description) {\n    id\n    description\n    completed\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = 'f95f689d649aafcd0d1e5f36903f625d';
+(node as any).hash = '2d3e9316d5f700ca110d376a514627fc';
 export default node;

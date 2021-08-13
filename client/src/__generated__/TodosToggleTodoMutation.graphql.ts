@@ -5,11 +5,11 @@
 import { ConcreteRequest } from "relay-runtime";
 
 export type TodosToggleTodoMutationVariables = {
-    _id: string;
+    id: string;
 };
 export type TodosToggleTodoMutationResponse = {
     readonly toggleTodo: {
-        readonly _id: string;
+        readonly id: string;
         readonly description: string;
         readonly completed: boolean;
     };
@@ -23,10 +23,10 @@ export type TodosToggleTodoMutation = {
 
 /*
 mutation TodosToggleTodoMutation(
-  $_id: String!
+  $id: String!
 ) {
-  toggleTodo(_id: $_id) {
-    _id
+  toggleTodo(id: $id) {
+    id
     description
     completed
   }
@@ -38,7 +38,7 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "_id"
+    "name": "id"
   }
 ],
 v1 = [
@@ -47,8 +47,8 @@ v1 = [
     "args": [
       {
         "kind": "Variable",
-        "name": "_id",
-        "variableName": "_id"
+        "name": "id",
+        "variableName": "id"
       }
     ],
     "concreteType": "Todo",
@@ -60,7 +60,7 @@ v1 = [
         "alias": null,
         "args": null,
         "kind": "ScalarField",
-        "name": "_id",
+        "name": "id",
         "storageKey": null
       },
       {
@@ -99,14 +99,14 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "9e5041f566f68253d147b7d523331266",
+    "cacheID": "e4e699901a45ed4d95fa8bf188fe4ed1",
     "id": null,
     "metadata": {},
     "name": "TodosToggleTodoMutation",
     "operationKind": "mutation",
-    "text": "mutation TodosToggleTodoMutation(\n  $_id: String!\n) {\n  toggleTodo(_id: $_id) {\n    _id\n    description\n    completed\n  }\n}\n"
+    "text": "mutation TodosToggleTodoMutation(\n  $id: String!\n) {\n  toggleTodo(id: $id) {\n    id\n    description\n    completed\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '259bcfae18082146116520827dd6f0c4';
+(node as any).hash = '25837f0d87efaff92e7fd4befc9aacbf';
 export default node;

@@ -3,7 +3,7 @@ import * as express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import * as cors from 'cors'
 
-import { schema } from '../../data/schema';
+import { schema } from '../../schema';
 import { resolvers } from '../../resolvers';
 
 const app = express()

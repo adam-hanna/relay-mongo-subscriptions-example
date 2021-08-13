@@ -7,7 +7,12 @@ import {
 const todos = async (): Promise<Array<Todo>> => {
   const db = DB.getInstance()
 
-  return db.collections.todos.find().toArray()
+  const todos = await db.collections.todos.find().toArray()
+
+  return todos.map(todo => {
+    todo.id = todo._id
+    return todo
+  }) as Array<Todo>
 }
 
 export const queries = {

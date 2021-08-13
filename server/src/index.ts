@@ -1,4 +1,6 @@
-import Watcher from 'relay-mongo-subscriptions/watcher'
+require('dotenv').config()
+import Watcher from 'relay-mongo-subscriptions/lib/watcher'
+console.log('watcher', Watcher)
 
 import { GraphQLServer } from './server'
 import DB from './db'
@@ -30,6 +32,7 @@ import DB from './db'
   watcher.setCollections({
     collections: [db.collections.todos]
   })
+  await watcher.openChangeStreams()
 
   const server = new GraphQLServer({
     wsPort,

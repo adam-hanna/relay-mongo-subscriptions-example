@@ -7,7 +7,7 @@ import { ConcreteRequest } from "relay-runtime";
 export type TodosQueryVariables = {};
 export type TodosQueryResponse = {
     readonly todos: ReadonlyArray<{
-        readonly _id: string;
+        readonly id: string;
         readonly description: string;
         readonly completed: boolean;
     }>;
@@ -22,7 +22,7 @@ export type TodosQuery = {
 /*
 query TodosQuery {
   todos {
-    _id
+    id
     description
     completed
   }
@@ -43,7 +43,7 @@ var v0 = [
         "alias": null,
         "args": null,
         "kind": "ScalarField",
-        "name": "_id",
+        "name": "id",
         "storageKey": null
       },
       {
@@ -82,14 +82,14 @@ return {
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "8f596b021703e119e757847791a5a9f0",
+    "cacheID": "def264acdbb63edbb8b9b9af42daebcb",
     "id": null,
     "metadata": {},
     "name": "TodosQuery",
     "operationKind": "query",
-    "text": "query TodosQuery {\n  todos {\n    _id\n    description\n    completed\n  }\n}\n"
+    "text": "query TodosQuery {\n  todos {\n    id\n    description\n    completed\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '54e525435b384a469087ca7574e6d840';
+(node as any).hash = 'a37e19e2c53b88d513332b3ddd5ae572';
 export default node;

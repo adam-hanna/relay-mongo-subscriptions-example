@@ -1,5 +1,6 @@
-import DB from '../../db'
+import { ObjectId } from 'mongodb'
 
+import DB from '../../db'
 import {
   Todo
 } from './types'
@@ -13,16 +14,17 @@ const newTodo = async ({ description }: { description: string }): Promise<Todo> 
   })
 
   return {
-    _id: insertedId.toHexString(),
+    id: insertedId.toHexString(),
     description,
     completed: false,
   }
 }
 
-const toggleTodo = async ({ _id }: { _id: string }): Promise<Todo | undefined> => {
+const toggleTodo = async ({ id }: { id: string }): Promise<Todo | undefined> => {
   const db = DB.getInstance()
 
-  const todo = await db.collections.todos.findOne({ _id })
+  const objId = new ObjectId(id)
+  let todo = await db.collections.todos.findOne({ _id: objId })
   if (!todo) {
     return
   }
@@ -30,11 +32,16 @@ const toggleTodo = async ({ _id }: { _id: string }): Promise<Todo | undefined> =
   todo.completed = !todo.completed
   await db.collections.todos.updateOne(
     {
-      _id
+      _id: objId
     },
-    todo
+    {
+      $set: {
+        ...todo
+      }
+    }
   )
 
+  todo.id = todo._id
   return todo as Todo
 }
 
