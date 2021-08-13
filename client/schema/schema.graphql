@@ -1,0 +1,37 @@
+scalar Object
+
+type Todo {
+  _id: ID!
+  description: String!
+  completed: Boolean!
+}
+
+type TruncatedArrays {
+  field: String!
+  newSize: Int!
+}
+
+type UpdateDescription {
+  updatedFields: Object!
+  removedFields: [String!]!
+  truncatedArrays: [TruncatedArrays!]!
+}
+
+type TodoSubscription {
+  doc: Todo!
+  operationType: String!
+  updateDescription: UpdateDescription!
+}
+
+type Query {
+  todos: [Todo!]!
+}
+
+type Subscription {
+  todosChanged: [TodoSubscription!]!
+}
+
+type Mutation {
+  newTodo(description: String!): Todo!
+  toggleTodo(_id: String!): Todo!
+}

@@ -1,0 +1,55 @@
+{
+  "name": "relay-mongo-subscriptions-example-client",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^12.20.19",
+    "@types/react": "^17.0.17",
+    "@types/react-dom": "^17.0.9",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-relay": "^11.0.2",
+    "react-scripts": "4.0.3",
+    "relay-compiler": "^11.0.2",
+    "relay-compiler-language-typescript": "^14.1.0",
+    "relay-config": "^11.0.2",
+    "relay-runtime": "^11.0.2",
+    "subscriptions-transport-ws": "^0.9.19",
+    "typescript": "^4.3.5",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "relay": "relay-compiler --src ./src --schema ./schema/schema.graphql --extensions js jsx ts tsx --language typescript --verbose",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-relay": "^11.0.2",
+    "babel-plugin-relay": "^11.0.2"
+  }
+}
