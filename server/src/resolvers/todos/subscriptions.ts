@@ -1,5 +1,4 @@
 import PubSub from 'relay-mongo-subscriptions/lib/pubsub'
-console.log('pubsub', PubSub)
 
 export const subscriptions = {
     todosChanged: {

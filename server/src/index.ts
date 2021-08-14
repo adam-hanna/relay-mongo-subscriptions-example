@@ -1,6 +1,5 @@
 require('dotenv').config()
 import Watcher from 'relay-mongo-subscriptions/lib/watcher'
-console.log('watcher', Watcher)
 
 import { GraphQLServer } from './server'
 import DB from './db'
